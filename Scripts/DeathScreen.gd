@@ -9,6 +9,7 @@ func _ready():
 		file.store_var(Global.score)
 		file.close()
 		Global.high_score = Global.score
+		SilentWolf.Scores.persist_score(Global.player_name, Global.high_score)
 	$ScoreLabel.text = "Score:\n" + str(Global.score)
 	$HighScoreLabel.text = "HighScore:\n" + str(Global.high_score)
 

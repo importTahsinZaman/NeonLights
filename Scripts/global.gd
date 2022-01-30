@@ -29,7 +29,7 @@ func _ready():
 	SilentWolf.configure({
 		"api_key": "TSqONkYBMN63WOWHKbPfh7Dz2oECXlgCAympkPt1",
 		"game_id": "NeonRain",
-		"game_version": "1.0.2",
+		"game_version": "1.0.3",
 		"log_level": 1
 	})
 	SilentWolf.configure_scores({

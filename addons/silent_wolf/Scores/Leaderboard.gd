@@ -22,7 +22,7 @@ func _ready():
 	else:
 		# use a signal to notify when the high scores have been returned, and show a "loading" animation until it's the case...
 		add_loading_scores_message()
-		yield(SilentWolf.Scores.get_high_scores(), "sw_scores_received")
+		yield(SilentWolf.Scores.get_high_scores(5), "sw_scores_received")
 		hide_message()
 		render_board(SilentWolf.Scores.scores, local_scores)
 		
@@ -90,38 +90,28 @@ func add_item(player_name, score):
 	list_index += 1
 	item.get_node("PlayerName").text = str(list_index) + str(". ") + player_name
 	item.get_node("Score").text = score
-	item.margin_top = list_index * 100
-	$"Board/HighScores/ScoreItemContainer".add_child(item)
+	item.rect_global_position.x = 8
+	item.rect_global_position.y = 16 * (list_index-1) + 19
+	add_child(item)
 
 
 func add_no_scores_message():
-	var item = $"Board/MessageContainer/TextMessage"
+	var item = $"TextMessage"
 	item.text = "No scores yet!"
-	$"Board/MessageContainer".show()
-	item.margin_top = 135
+	item.show()
 
 
 func add_loading_scores_message():
-	var item = $"Board/MessageContainer/TextMessage"
+	var item = $"TextMessage"
 	item.text = "Loading scores..."
-	$"Board/MessageContainer".show()
-	item.margin_top = 135
+	item.show()
 
 
 func hide_message():
-	$"Board/MessageContainer".hide()
+	$"TextMessage".hide()
 
 
-func clear_leaderboard():
-	var score_item_container = $"Board/HighScores/ScoreItemContainer"
-	if score_item_container.get_child_count() > 0:
-		var children = score_item_container.get_children()
-		for c in children:
-			score_item_container.remove_child(c)
-			c.queue_free()
-
-
-func _on_CloseButton_pressed():
+func _on_MenuButton_pressed():
 	var scene_name = SilentWolf.scores_config.open_scene_on_close
 	SWLogger.info("Closing SilentWolf leaderboard, switching to scene: " + str(scene_name))
 	#global.reset()
