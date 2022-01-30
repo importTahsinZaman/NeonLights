@@ -4,10 +4,20 @@ var score_file = "user://score.save"
 var player_name_file = "user://player_name.save"
 
 var score = 0
-var player_hits = 0
 var high_score = 0
-
 var player_name = ""
+
+var player_hits = 0
+
+#####-Balance_Stats-######
+var min_proj_speed = 5          #Default: 12
+var max_proj_speed = 15         #Default: 25
+var spawntimer_min = 0.1        #Default: 0.1
+var spawntimer_max = 0.4        #Default: 0.5
+var player_speed = 6            #Default: 5
+var player_health = 4           #Default: 4
+var proj_accel = 1.2            #Default: 1.1
+#####-Balance_Stats-######
 
 func _ready():
 	var file = File.new()
